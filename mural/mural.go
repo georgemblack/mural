@@ -47,7 +47,7 @@ func Start(config Config) {
 					wg.Done()
 					return
 				}
-				processImage(filePath, config.InputDir, config.OutputDir)
+				processImage(filePath, config.InputDir, config.OutputDir, config.SortStrength)
 			}
 		}()
 	}
@@ -93,9 +93,9 @@ func readInputDir(dirPath string) ([]string, error) {
 	return imageFilePaths, err
 }
 
-func processImage(filePath, inputDir, outputDir string) {
+func processImage(filePath, inputDir, outputDir string, sortStrength int) {
 	fileName := filepath.Base(filePath)
-	err := sortImage(filePath, outputDir)
+	err := sortImage(filePath, outputDir, sortStrength)
 	if err != nil {
 		log.Printf("Error while processing %s: %s\n", fileName, err)
 	}

@@ -16,7 +16,7 @@ type pixel struct {
 	weight float64
 }
 
-func sortImage(inputFilePath, outputDirPath string) error {
+func sortImage(inputFilePath, outputDirPath string, strength int) error {
 	inputFileName := filepath.Base(inputFilePath)
 
 	// open file
@@ -41,7 +41,7 @@ func sortImage(inputFilePath, outputDirPath string) error {
 
 	// begin pixel-sort
 	log.Printf("Starting sort on image: %s\n", inputFileName)
-	destImage := sortImageHelper(srcImage, width, height, 6)
+	destImage := sortImageHelper(srcImage, width, height, strength)
 
 	// create or open file in output dir
 	outputFilePath := outputDirPath + "/" + inputFileName
