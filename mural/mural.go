@@ -9,10 +9,10 @@ import (
 )
 
 // Start will read all pngs in input dir, perform a pixel-sort on each, then save to output dir
-func Start(inputDir, outputDir string) {
+func Start(config Config) {
 	log.Printf("starting mural...\n")
 
-	inputFilePaths, err := readInputDir(inputDir)
+	inputFilePaths, err := readInputDir(config.InputDir)
 	if err != nil {
 		log.Printf("failed to read input directory: %s\n", err)
 		os.Exit(1)
@@ -47,7 +47,7 @@ func Start(inputDir, outputDir string) {
 					wg.Done()
 					return
 				}
-				processImage(filePath, inputDir, outputDir)
+				processImage(filePath, config.InputDir, config.OutputDir)
 			}
 		}()
 	}

@@ -9,20 +9,31 @@ import (
 )
 
 const (
-	defaultInputDir  = "./data/input"
-	defaultOutputDir = "./data/output"
-	logFilePath      = "./mural.log"
+	defaultInputDir      = "./data/input"
+	defaultOutputDir     = "./data/output"
+	defaultSortDirection = "horizontal"
+	defaultSortStrength  = 5
+	logFilePath          = "./mural.log"
 )
 
 func main() {
 	inputDir := flag.String("input-dir", defaultInputDir, "directory containing source images")
 	outputDir := flag.String("output-dir", defaultOutputDir, "directory for resulting images")
+	sortDirection := flag.String("sort-direction", defaultSortDirection, "horizontal or vertical sorting")
+	sortStrength := flag.Int("sort-strength", defaultSortStrength, "strength of sort")
 	logToFile := flag.Bool("log-to-file", false, "write log to file")
 
 	flag.Parse()
 
+	config := mural.Config{
+		*inputDir,
+		*outputDir,
+		*sortDirection,
+		*sortStrength,
+	}
+
 	initLog(*logToFile)
-	mural.Start(*inputDir, *outputDir)
+	mural.Start(config)
 }
 
 func initLog(logToFile bool) {
