@@ -10,11 +10,11 @@ import (
 
 // Start will read all pngs in input dir, perform a pixel-sort on each, then save to output dir
 func Start(config Config) {
-	log.Printf("starting mural...\n")
+	log.Printf("Starting mural...\n")
 
 	inputFilePaths, err := readInputDir(config.InputDir)
 	if err != nil {
-		log.Printf("failed to read input directory: %s\n", err)
+		log.Printf("Failed to read input directory: %s\n", err)
 		os.Exit(1)
 	}
 
@@ -22,7 +22,7 @@ func Start(config Config) {
 	numImages := len(inputFilePaths)
 
 	if numImages == 0 {
-		log.Printf("mural found no images to process\n")
+		log.Printf("Mural found no images to process\n")
 		return
 	}
 
@@ -35,7 +35,7 @@ func Start(config Config) {
 	var wg sync.WaitGroup
 
 	// start numThreads number of goroutines
-	log.Printf("starting %d threads to process %d images\n", numThreads, numImages)
+	log.Printf("Starting %d threads to process %d images\n", numThreads, numImages)
 	wg.Add(numThreads)
 	for i := 0; i < numThreads; i++ {
 		go func() {
@@ -60,7 +60,7 @@ func Start(config Config) {
 	close(queue)
 	wg.Wait() // wait for all threads to finish
 
-	log.Printf("mural complete!\n")
+	log.Printf("Mural complete!\n")
 }
 
 func readInputDir(dirPath string) ([]string, error) {
@@ -72,16 +72,16 @@ func readInputDir(dirPath string) ([]string, error) {
 		}
 
 		if info.IsDir() {
-			log.Printf("ignoring directory: %s\n", path)
+			log.Printf("Ignoring directory: %s\n", path)
 			return nil
 		}
 
 		if filepath.Ext(path) != ".png" {
-			log.Printf("ignoring non-image file: %s\n", path)
+			log.Printf("Ignoring non-image file: %s\n", path)
 			return nil
 		}
 
-		log.Printf("found image file: %s\n", path)
+		log.Printf("Found image file: %s\n", path)
 		imageFilePaths = append(imageFilePaths, path)
 		return nil
 	})
@@ -97,6 +97,6 @@ func processImage(filePath, inputDir, outputDir string) {
 	fileName := filepath.Base(filePath)
 	err := sortImage(filePath, outputDir)
 	if err != nil {
-		log.Printf("error while processing %s: %s\n", fileName, err)
+		log.Printf("Error while processing %s: %s\n", fileName, err)
 	}
 }

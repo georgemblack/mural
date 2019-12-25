@@ -20,7 +20,7 @@ func sortImage(inputFilePath, outputDirPath string) error {
 	inputFileName := filepath.Base(inputFilePath)
 
 	// open file
-	log.Printf("opening file at: %s\n", inputFilePath)
+	log.Printf("Opening file at: %s\n", inputFilePath)
 	srcFile, err := os.Open(inputFilePath)
 	if err != nil {
 		return err
@@ -37,10 +37,10 @@ func sortImage(inputFilePath, outputDirPath string) error {
 	bounds := srcImage.Bounds()
 	width := bounds.Max.X
 	height := bounds.Max.Y
-	log.Printf("image width: " + strconv.Itoa(width) + " height: " + strconv.Itoa(height) + "\n")
+	log.Printf("Image width: " + strconv.Itoa(width) + " height: " + strconv.Itoa(height) + "\n")
 
 	// begin pixel-sort
-	log.Printf("starting sort on image: %s\n", inputFileName)
+	log.Printf("Starting sort on image: %s\n", inputFileName)
 	destImage := sortImageHelper(srcImage, width, height, 6)
 
 	// create or open file in output dir
@@ -52,7 +52,7 @@ func sortImage(inputFilePath, outputDirPath string) error {
 	defer destFile.Close()
 
 	png.Encode(destFile, destImage)
-	log.Printf("finished sort for image: " + inputFileName)
+	log.Printf("Finished sort for image: " + inputFileName)
 
 	return nil
 }
