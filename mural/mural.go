@@ -77,7 +77,7 @@ func readInputDir(dirPath string) ([]string, error) {
 		}
 
 		if filepath.Ext(path) != ".png" {
-			log.Printf("Ignoring non-image file: %s\n", path)
+			log.Printf("Ignoring non-PNG file: %s\n", path)
 			return nil
 		}
 
