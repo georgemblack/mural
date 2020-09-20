@@ -1,4 +1,4 @@
-FROM golang:1.13-buster as build
+FROM golang:1.15-buster as build
 WORKDIR /go/src/app
 ADD ./mural /go/src/app
 RUN go build -o /go/bin/app ./cmd/mural/main.go 
