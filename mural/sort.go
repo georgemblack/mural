@@ -45,7 +45,7 @@ func sortImage(inputFilePath, outputDirPath string, strength int) error {
 
 	// create or open file in output dir
 	outputFilePath := outputDirPath + "/" + inputFileName
-	destFile, err := os.OpenFile(outputFilePath, os.O_WRONLY|os.O_CREATE, 0600)
+	destFile, err := os.OpenFile(outputFilePath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
 	if err != nil {
 		return err
 	}

@@ -26,10 +26,10 @@ func main() {
 	flag.Parse()
 
 	config := mural.Config{
-		*inputDir,
-		*outputDir,
-		*sortDirection,
-		*sortStrength,
+		InputDir:      *inputDir,
+		OutputDir:     *outputDir,
+		SortDirection: *sortDirection,
+		SortStrength:  *sortStrength,
 	}
 
 	initLog(*logToFile)
